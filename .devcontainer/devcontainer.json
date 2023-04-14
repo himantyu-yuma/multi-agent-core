@@ -1,0 +1,19 @@
+{
+  "name": "Python Poetry DevContainer",
+  "dockerComposeFile": [
+    "../compose.yml"
+  ],
+  "service": "api",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ],
+      "settings": {
+        "python.formatting.provider": "black",
+        "python.linting.flake8Enabled": true
+      }
+    }
+  },
+  "workspaceFolder": "/app/src"
+}

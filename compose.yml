@@ -1,0 +1,14 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app/src
+    ports:
+      - 8888:8000
+    restart: always
+    stdin_open: true
+    tty: true
