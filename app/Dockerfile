@@ -14,7 +14,7 @@ ENV PATH $PATH:/root/.local/bin/
 # packages install
 WORKDIR /app/src
 
-COPY ./app/pyproject.toml /app/src/pyproject.toml
+COPY ./pyproject.toml /app/src/pyproject.toml
 RUN poetry install
 
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0"]
+CMD ["poetry", "run", "uvicorn", "main:app", "--reload", "--host", "0.0.0.0"]
