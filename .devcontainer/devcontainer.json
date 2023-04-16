@@ -3,7 +3,7 @@
   "dockerComposeFile": [
     "../compose.yml"
   ],
-  "service": "api",
+  "service": "app",
   "customizations": {
     "vscode": {
       "extensions": [
