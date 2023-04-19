@@ -7,7 +7,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python"
+        "ms-python.python",
+        "ms-python.flake8"
       ],
       "settings": {
         "python.formatting.provider": "black",
