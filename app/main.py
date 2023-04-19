@@ -13,6 +13,14 @@ async def root():
     return {"message": "Hello World"}
 
 
+@app.get("/ping")
+async def ping():
+    """
+    疎通確認用エンドポイント
+    """
+    return
+
+
 @app.post("/chat")
 async def chat(message: ChatMessage):
     """
