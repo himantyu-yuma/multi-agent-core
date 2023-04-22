@@ -1,5 +1,6 @@
 version: '3'
 services:
+  # TODO: 安定したらvolume永続化
   mongo:
     image: mongo
     restart: always
