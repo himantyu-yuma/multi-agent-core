@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Speacker(Enum):
+class Speaker(Enum):
     NOI = "NOI"
     SAI = "SAI"
     EMA = "EMA"
