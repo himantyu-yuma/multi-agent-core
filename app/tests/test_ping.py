@@ -5,7 +5,7 @@ from main import app
 client = TestClient(app)
 
 
-def test_read_main():
+def test_get_ping():
     """
     疎通確認のテスト
     """
