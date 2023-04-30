@@ -1,7 +1,8 @@
-from settings.get_template import get_template
-from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+
 from controls.llm import chatGpt
+from settings.get_template import get_template
 
 
 def classify(sentence: str, speaker: str):

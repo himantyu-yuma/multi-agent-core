@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 
 from models.chat_message import ChatMessage
-
 # NOTE: 型定義は外部から呼び出す
 from models.speaker import Speacker
 
