@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 
 from models.chat_message import ChatMessage
+
 # NOTE: 型定義は外部から呼び出す
-from models.speaker import Speacker
+from models.speaker import Speaker
 
 app = FastAPI()
 
@@ -36,7 +37,7 @@ async def chat(message: ChatMessage):
 
 
 @app.post("/chat/{speaker}")
-async def read_item(speaker: Speacker):
+async def read_item(speaker: Speaker):
     """
     特定のスピーカー向けエンドポイント
     """
