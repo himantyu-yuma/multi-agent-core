@@ -25,6 +25,8 @@ services:
         target: /app/src
     ports:
       - 8888:8000
+    environment:
+      - PYTHONPATH=/app/src/
     restart: always
     stdin_open: true
     tty: true
