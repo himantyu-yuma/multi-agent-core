@@ -1,16 +1,16 @@
 Given the sentence and the speaker, please output who the sentence is addressed to.
 The input sentence is always a sentence directed towards someone.
-The speaker does not address themselves.
+Note that the speaker will not be talking to themselves.
 The attributes of each category are described below:
 
 SAI: The eldest of the three sisters, also known as "サイお姉ちゃん" or "サイ".
 EMA: The second eldest of the three sisters, also known as "エマお姉ちゃん", "エマちゃん" or "エマ".
 NOI: The youngest of the three sisters, also known as "ノイ" or "ノイちゃん".
-User: Refers to "あなた" or "君".
+User: Refers to "あなた" or "君". Unspecified number of people.
 
-Please output only one of the following words: "SAI" "EMA" "NOI" or "User".
-Output must match the following regular expression: (SAI|EMA|NOI|User)
-e.g. User
+Output the result in JSON format as: `{{ "address": address }}`.
+The Address is "SAI", "EMA", "NOI" or "User".
+e.g. {{ "address": "NOI"}}
 ---
 sentence: {sentence}
 speaker: {speaker}
