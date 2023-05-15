@@ -34,5 +34,5 @@ def create_script(topic: str):
 
 
 if __name__ == "__main__":
-    sample = create_script("学食をこれから食べる予定であり、チキンタツタ丼がおすすめである")
+    sample = create_script("三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している")
     print(sample)
