@@ -16,10 +16,12 @@ def chat_with_charactor(address: Speaker, sentence: str):
     template = get_template(address)
     system_prompt = SystemMessagePromptTemplate.from_template(template)
 
+    mongo_uri = "mongodb://root:root@mongo:27017/messages?authSource=admin"
+
     # FIXME: session_idとか固定じゃダメな気がする
     history = MongoChatMessageHistory(
         session_id="temp",
-        connection_string="mongodb://root:root@mongo:27017/messages?authSource=admin",
+        connection_string=mongo_uri,
         collection_name="sample",
     )
     memory = ConversationBufferMemory(
