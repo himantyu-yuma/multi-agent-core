@@ -92,5 +92,9 @@ def filter_scripts(published_date: datetime.date | None):
 
 
 if __name__ == "__main__":
-    sample = create_script("三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している")
+    sample = create_script(
+        "学食",
+        "三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している",
+        datetime.datetime(2023, 5, 19, 12, 0, 0),
+    )
     print(sample)
