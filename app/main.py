@@ -1,11 +1,9 @@
+import datetime
+
 from fastapi import FastAPI
 
-from controls.chat_chain import chat_with_charactor
-from controls.classify import classify
-from models.chat_message import ChatMessage, ChatMessageWithSpeaker
-
-# NOTE: 型定義は外部から呼び出す
-from models.speaker import Speaker
+from controls import script
+from models.scripts import CreateScriptRequest
 
 app = FastAPI()
 
@@ -30,24 +28,22 @@ async def ping():
     return
 
 
-@app.post("/chat")
-async def chat(message: ChatMessageWithSpeaker):
+@app.post("/script")
+async def post_script(req: CreateScriptRequest):
     """
-    チャット用エンドポイント
+    台本作成用エンドポイント
     """
-    address = classify(sentence=message.content, speaker=message.speaker)
-    # ユーザー向けのメッセージは無視
-    if address == "User":
-        return
-    result = chat_with_charactor(address, message.content)
-    return {"speaker": address, "content": result}
+    return script.create_script(req.topic, req.instraction, req.published_at)
 
 
-@app.post("/chat/{address}")
-async def read_item(address: Speaker, message: ChatMessage):
-    """
-    特定のスピーカー向けエンドポイント
-    """
+@app.get("/scripts")
+async def get_scripts(published_date: datetime.date | None = None):
+    return script.filter_scripts(published_date)
 
-    result = chat_with_charactor(address.value, message.content)
-    return result
+
+@app.get("/scripts/{script_id}")
+async def get_script(script_id: str):
+    """
+    台本取得用エンドポイント
+    """
+    return script.get_script(script_id)
