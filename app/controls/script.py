@@ -55,6 +55,14 @@ def create_script(
     client.close_connection()
 
     return str(scripts_id)
+
+
+def get_script(script_id: str):
+    # FIXME: 多分with句使えば良い感じになりそう
+    client = MongoDB(collection_name="scripts")
+    data = client.find_one({"_id": ObjectId(script_id)})
+    result = {**data, "_id": str(data["_id"])}
+    client.close_connection()
     return result
 
 
