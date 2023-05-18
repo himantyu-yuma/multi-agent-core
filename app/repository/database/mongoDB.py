@@ -13,8 +13,8 @@ DEFAULT_CONNECTION_STRING = (
 class MongoDB:
     def __init__(
         self,
-        connection_string: str = DEFAULT_CONNECTION_STRING,
         collection_name="data",
+        connection_string: str = DEFAULT_CONNECTION_STRING,
     ):
         try:
             self.client = MongoClient(connection_string)
@@ -32,13 +32,13 @@ class MongoDB:
             print(e)
 
     def insert_one(self, data):
-        self.collection.insert_one(data)
+        return self.collection.insert_one(data)
 
     def close_connection(self):
         self.client.close()
 
     def find_one(self, query):
-        return self.collection.find_one(query)
+        return self.collection.find_one(filter=query)
 
     def find_many(self, query):
-        return self.collection.find(query)
+        return self.collection.find(filter=query)
