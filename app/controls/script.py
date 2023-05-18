@@ -66,6 +66,31 @@ def get_script(script_id: str):
     return result
 
 
+def filter_scripts(published_date: datetime.date | None):
+    client = MongoDB(collection_name="scripts")
+    if published_date is None:
+        data = client.find_many({})
+    else:
+        data = client.find_many(
+            {
+                "published_at": {
+                    # JSTでの日付を指定されたと仮定して変換
+                    "$gte": datetime.datetime.combine(
+                        published_date, datetime.time(0, 0, 0)
+                    )
+                    - datetime.timedelta(hours=9),
+                    "$lt": datetime.datetime.combine(
+                        published_date, datetime.time(0, 0, 0)
+                    )
+                    - datetime.timedelta(hours=9)
+                    + datetime.timedelta(days=1),
+                }
+            }
+        )
+    result = [{**datum, "_id": str(datum["_id"])} for datum in data]
+    return result
+
+
 if __name__ == "__main__":
     sample = create_script("三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している")
     print(sample)
