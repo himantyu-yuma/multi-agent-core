@@ -37,7 +37,7 @@ def create_script(
     for line in lines:
         if line == "":
             continue
-        (speaker, quote) = re.split("[:：]", re.sub(" 　", "", line))
+        (speaker, quote) = re.split("[:：]", re.sub("[ 　]", "", line))
         scripts.append(
             {"order": line_order, "speaker": speaker, "quote": quote}
         )
