@@ -82,3 +82,27 @@ async def get_user_response(response_id: str | None = None):
     idからユーザーの返答を取得する用エンドポイント
     """
     return user_response.get_user_response(response_id)
+
+
+@app.post("/responses/agent")
+async def post_agent_response(req):
+    """
+    ユーザーの返答を受けた会話の続き生成用エンドポイント
+    """
+    return
+
+
+@app.get("reponses/agent")
+async def get_agent_responses(user_response_id: str):
+    """
+    ユーザーの返答に紐づいている返答取得用エンドポイント
+    """
+    return
+
+
+@app.get("responses/agent/{response_id}")
+async def get_agent_response(response_id: str):
+    """
+    idからエージェントの返答を取得する用エンドポイント
+    """
+    return
