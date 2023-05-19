@@ -78,7 +78,7 @@ async def get_user_responses(script_id: str | None = None):
 
 
 @app.get("/responses/user/{response_id}")
-async def get_user_response(response_id: str | None = None):
+async def get_user_response(response_id: str):
     """
     idからユーザーの返答を取得する用エンドポイント
     """
