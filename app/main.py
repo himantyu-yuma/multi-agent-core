@@ -3,7 +3,8 @@ import datetime
 from fastapi import FastAPI, HTTPException
 from pymongo.errors import DuplicateKeyError
 
-from controls import script, user_response
+from controls import agent_response, script, user_response
+from models.agent_response import CreateAgentResponseRequest
 from models.scripts import CreateScriptRequest
 from models.user_response import CreateUserResponseRequest
 
@@ -85,24 +86,33 @@ async def get_user_response(response_id: str | None = None):
 
 
 @app.post("/responses/agent")
-async def post_agent_response(req):
+async def post_agent_response(req: CreateAgentResponseRequest):
     """
     ユーザーの返答を受けた会話の続き生成用エンドポイント
     """
-    return
+    try:
+        res = agent_response.create_agent_response_by_user_response(
+            req.user_response_id
+        )
+    except DuplicateKeyError:
+        raise HTTPException(
+            status_code=400,
+            detail="Duplicated Key: user_response_id",
+        )
+    return res
 
 
-@app.get("reponses/agent")
-async def get_agent_responses(user_response_id: str):
+@app.get("/reponses/agent")
+async def get_agent_responses(script_id: str | None = None):
     """
     台本に紐づいているエージェントの返答取得用エンドポイント
     """
-    return
+    return agent_response.filter_agent_responses(script_id)
 
 
-@app.get("responses/agent/{response_id}")
+@app.get("/responses/agent/{response_id}")
 async def get_agent_response(response_id: str):
     """
     idからエージェントの返答を取得する用エンドポイント
     """
-    return
+    return agent_response.get_agent_response(response_id)
