@@ -1,6 +1,7 @@
 import datetime
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pymongo.errors import DuplicateKeyError
 
 from controls import script, user_response
 from models.scripts import CreateScriptRequest
@@ -50,8 +51,26 @@ async def get_script(script_id: str):
     return script.get_script(script_id)
 
 
-@app.post("/response/user")
-async def post_response(data: CreateUserResponseRequest):
-    return user_response.create_user_response_by_script(
-        data.script_id, data.break_point
-    )
+@app.post("/responses/user")
+async def post_response(req: CreateUserResponseRequest):
+    """
+    台本に基づいたユーザー返答生成用エンドポイント
+    """
+    try:
+        res = user_response.create_user_response_by_script(
+            req.script_id, req.break_point
+        )
+    except DuplicateKeyError:
+        raise HTTPException(
+            status_code=400,
+            detail="Duplicated Combination: script_id, break_point",
+        )
+    return res
+
+
+@app.get("/responses/user")
+async def get_responses(script_id: str | None = None):
+    """
+    台本に紐づいている返答取得用エンドポイント
+    """
+    return user_response.filter_user_responses(script_id)
