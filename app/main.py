@@ -95,7 +95,7 @@ async def post_agent_response(req):
 @app.get("reponses/agent")
 async def get_agent_responses(user_response_id: str):
     """
-    ユーザーの返答に紐づいている返答取得用エンドポイント
+    台本に紐づいているエージェントの返答取得用エンドポイント
     """
     return
 
