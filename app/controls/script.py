@@ -45,6 +45,7 @@ def create_script(
 
     data = {
         "topic": topic,
+        "prompt": template.format(topic=instruction),
         "scripts": scripts,
         "published_at": published_at,
         "created_at": datetime.datetime.now(),
