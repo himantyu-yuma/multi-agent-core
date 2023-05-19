@@ -38,7 +38,7 @@ def create_user_response_by_script(script_id: str, break_point: int):
 
     response = create_user_response(script_text)
 
-    client = MongoDB(collection_name="user_response")
+    client = MongoDB(collection_name="user_responses")
     result = client.insert_one(
         {
             "script_id": script_id,
@@ -48,6 +48,17 @@ def create_user_response_by_script(script_id: str, break_point: int):
     )
     client.close_connection()
     return str(result.inserted_id)
+
+
+def filter_user_responses(script_id: str | None):
+    client = MongoDB(collection_name="user_responses")
+    if script_id is None:
+        data = client.find_many({})
+    else:
+        data = client.find_many({"script_id": script_id})
+    result = [{**datum, "_id": str(datum["_id"])} for datum in data]
+    client.close_connection()
+    return result
 
 
 if __name__ == "__main__":
