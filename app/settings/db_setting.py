@@ -11,3 +11,8 @@ user_collection = db["user_responses"]
 user_collection.create_index(
     [("script_id", 1), ("break_point", 1)], unique=True
 )
+
+agent_collection = db["agent_responses"]
+agent_collection.create_index([("user_response_id", 1)], unique=True)
+
+client.close()
