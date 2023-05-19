@@ -1,3 +1,4 @@
+from bson import ObjectId
 from langchain import LLMChain, PromptTemplate
 
 from controls.llm import chatGpt
@@ -59,6 +60,14 @@ def filter_user_responses(script_id: str | None):
     result = [{**datum, "_id": str(datum["_id"])} for datum in data]
     client.close_connection()
     return result
+
+
+def get_user_response(response_id: str):
+    client = MongoDB(collection_name="user_responses")
+    data = client.find_one({"_id": ObjectId(response_id)})
+    client.close_connection()
+    res = {**data, "_id": str(data["_id"])}
+    return res
 
 
 if __name__ == "__main__":

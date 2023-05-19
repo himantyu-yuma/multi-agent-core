@@ -52,7 +52,7 @@ async def get_script(script_id: str):
 
 
 @app.post("/responses/user")
-async def post_response(req: CreateUserResponseRequest):
+async def post_user_response(req: CreateUserResponseRequest):
     """
     台本に基づいたユーザー返答生成用エンドポイント
     """
@@ -69,8 +69,16 @@ async def post_response(req: CreateUserResponseRequest):
 
 
 @app.get("/responses/user")
-async def get_responses(script_id: str | None = None):
+async def get_user_responses(script_id: str | None = None):
     """
     台本に紐づいている返答取得用エンドポイント
     """
     return user_response.filter_user_responses(script_id)
+
+
+@app.get("/responses/user/{response_id}")
+async def get_user_response(response_id: str | None = None):
+    """
+    台本に紐づいている返答取得用エンドポイント
+    """
+    return user_response.get_user_response(response_id)
