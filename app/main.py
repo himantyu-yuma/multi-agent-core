@@ -30,7 +30,7 @@ async def ping():
     return
 
 
-@app.post("/script")
+@app.post("/scripts")
 async def post_script(req: CreateScriptRequest):
     """
     台本作成用エンドポイント
