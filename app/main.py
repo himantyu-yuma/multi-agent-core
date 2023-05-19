@@ -2,8 +2,9 @@ import datetime
 
 from fastapi import FastAPI
 
-from controls import script
+from controls import script, user_response
 from models.scripts import CreateScriptRequest
+from models.user_response import CreateUserResponseRequest
 
 app = FastAPI()
 
@@ -47,3 +48,10 @@ async def get_script(script_id: str):
     台本取得用エンドポイント
     """
     return script.get_script(script_id)
+
+
+@app.post("/response/user")
+async def post_response(data: CreateUserResponseRequest):
+    return user_response.create_user_response_by_script(
+        data.script_id, data.break_point
+    )
