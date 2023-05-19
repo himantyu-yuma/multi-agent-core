@@ -36,9 +36,7 @@ def create_agent_response(
     memory.chat_memory.add_ai_message(agent_sentence)
     memory.chat_memory.add_user_message(user_sentence)
 
-    chain = LLMChain(
-        llm=chatGpt, prompt=chat_propmpt_template, memory=memory, verbose=True
-    )
+    chain = LLMChain(llm=chatGpt, prompt=chat_propmpt_template, memory=memory)
     result = chain.predict(input=user_s)
 
     return result
