@@ -41,7 +41,7 @@ async def post_script(req: CreateScriptRequest):
 
 @app.get("/scripts")
 async def get_scripts(published_date: datetime.date | None = None):
-    return script.filter_scripts(published_date)
+    return {"data": script.filter_scripts(published_date)}
 
 
 @app.get("/scripts/{script_id}")
