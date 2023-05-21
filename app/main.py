@@ -74,7 +74,7 @@ async def get_user_responses(script_id: str | None = None):
     """
     台本に紐づいている返答取得用エンドポイント
     """
-    return user_response.filter_user_responses(script_id)
+    return {"data": user_response.filter_user_responses(script_id)}
 
 
 @app.get("/responses/user/{response_id}")
