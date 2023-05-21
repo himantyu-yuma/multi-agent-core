@@ -107,7 +107,7 @@ async def get_agent_responses(script_id: str | None = None):
     """
     台本に紐づいているエージェントの返答取得用エンドポイント
     """
-    return agent_response.filter_agent_responses(script_id)
+    return {"data": agent_response.filter_agent_responses(script_id)}
 
 
 @app.get("/responses/agent/{response_id}")
