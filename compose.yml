@@ -30,3 +30,8 @@ services:
     restart: always
     stdin_open: true
     tty: true
+  voicevox_engine:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports:
+      - "50021:50021"
+    tty: true

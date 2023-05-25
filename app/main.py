@@ -102,7 +102,7 @@ async def post_agent_response(req: CreateAgentResponseRequest):
     return res
 
 
-@app.get("/reponses/agent")
+@app.get("/responses/agent")
 async def get_agent_responses(script_id: str | None = None):
     """
     台本に紐づいているエージェントの返答取得用エンドポイント
