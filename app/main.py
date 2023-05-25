@@ -41,7 +41,7 @@ async def post_script(req: CreateScriptRequest):
 
 @app.get("/scripts")
 async def get_scripts(published_date: datetime.date | None = None):
-    return script.filter_scripts(published_date)
+    return {"data": script.filter_scripts(published_date)}
 
 
 @app.get("/scripts/{script_id}")
@@ -74,7 +74,7 @@ async def get_user_responses(script_id: str | None = None):
     """
     台本に紐づいている返答取得用エンドポイント
     """
-    return user_response.filter_user_responses(script_id)
+    return {"data": user_response.filter_user_responses(script_id)}
 
 
 @app.get("/responses/user/{response_id}")
@@ -102,12 +102,12 @@ async def post_agent_response(req: CreateAgentResponseRequest):
     return res
 
 
-@app.get("/reponses/agent")
+@app.get("/responses/agent")
 async def get_agent_responses(script_id: str | None = None):
     """
     台本に紐づいているエージェントの返答取得用エンドポイント
     """
-    return agent_response.filter_agent_responses(script_id)
+    return {"data": agent_response.filter_agent_responses(script_id)}
 
 
 @app.get("/responses/agent/{response_id}")

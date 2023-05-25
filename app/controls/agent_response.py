@@ -98,7 +98,7 @@ def filter_agent_responses(script_id: str | None):
     if script_id is None:
         data = client.find_many({})
     else:
-        data = client.find_many({"script_id", script_id})
+        data = client.find_many({"script_id": script_id})
     result = [{**datum, "_id": str(datum["_id"])} for datum in data]
     client.close_connection()
     return result
