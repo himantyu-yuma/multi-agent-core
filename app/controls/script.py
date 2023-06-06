@@ -93,9 +93,19 @@ def filter_scripts(published_date: datetime.date | None):
 
 
 if __name__ == "__main__":
-    sample = create_script(
-        "学食",
-        "三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している",
-        datetime.datetime(2023, 5, 19, 12, 0, 0),
-    )
-    print(sample)
+    from time import sleep
+
+    # sample = create_script(
+    #     "学食",
+    #     "三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している",
+    #     datetime.datetime(2023, 5, 19, 12, 0, 0),
+    # )
+    # print(sample)
+    for i in range(3):
+        sample = create_script(
+            "雑談",
+            "三姉妹が大学生活について雑談している。",
+            datetime.datetime(2023, 6, 6, 13, i, 0),
+        )
+        print(sample)
+        sleep(10)
