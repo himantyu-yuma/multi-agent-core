@@ -110,7 +110,9 @@ if __name__ == "__main__":
             "三姉妹が大学生活について雑談している。",
             datetime.datetime(2023, 6, 6, 13, i, 0),
         )
-        with open(current_dir / "scripts.txt", mode="w") as f:
+        with open(
+            current_dir / "scripts.txt", mode="w", encoding="utf-8"
+        ) as f:
             f.write(f"{sample}\n")
         print(sample)
         sleep(10)

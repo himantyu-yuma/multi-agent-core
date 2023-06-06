@@ -113,17 +113,21 @@ def get_agent_response(response_id: str):
 
 
 if __name__ == "__main__":
-    #     system_prompt = """
-    # 三姉妹は学食をこれから食べる予定であり、チキンタツタ丼がおすすめであることについて話している
-    #     """
-    #     agent_s = """
-    # サイ：こんにちは、エマ、ノイ。今日は学食で何を食べようかしら。
-    # エマ：私はチキンタツタ丼がおいしいって聞いたことがあるわ。
-    # ノイ：そうだよね、私も食べたことあるけど、おすすめだよ。
-    #     """
-    #     user_s = """
-    # それなら私もチキンタツタ丼を食べてみようかな。
-    #     """
-    #     res = create_agent_response(instruction, agent_s, user_s)
-    res = create_agent_response_by_user_response("64671d8a2fee3f8bbf4a8aa6")
-    print(res)
+    import pathlib
+    from time import sleep
+
+    # res = create_agent_response_by_user_response("64671d8a2fee3f8bbf4a8aa6")
+    # print(res)
+    current_dir = pathlib.Path(__file__).parent
+    with open(
+        current_dir / "user_responses.txt", mode="r", encoding="utf-8"
+    ) as f:
+        ur_ids = f.readlines()
+    for ur_id in ur_ids:
+        res = create_agent_response_by_user_response(ur_id)
+        print(res)
+        with open(
+            current_dir / "agent_responses.txt", mode="w", encoding="utf-8"
+        ) as f:
+            f.write(f"{res}\n")
+        sleep(10)

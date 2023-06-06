@@ -71,13 +71,20 @@ def get_user_response(response_id: str):
 
 
 if __name__ == "__main__":
-    #     s = """
-    # サイ：こんにちは、エマ、ノイ。今日は学食で何を食べようかしら。
-    # エマ：私はチキンタツタ丼がおいしいって聞いたことがあるわ。
-    # ノイ：そうだよね、私も食べたことあるけど、おすすめだよ。
-    #     """
-    #     res = create_user_response(s)
-    #     print(res)
-    s_id = "646668927483c4e9fa4e9a86"
-    res = create_user_response_by_script(s_id, 2)
-    print(res)
+    import pathlib
+    from time import sleep
+
+    # s_id = "646668927483c4e9fa4e9a86"
+    # res = create_user_response_by_script(s_id, 2)
+    # print(res)
+    current_dir = pathlib.Path(__file__).parent
+    with open(current_dir / "scripts.txt", mode="r", encoding="utf-8") as f:
+        ids = f.readlines()
+    for s_id in ids:
+        res = create_user_response_by_script(s_id, 3)
+        print(res)
+        with open(
+            current_dir / "user_responses.txt", mode="w", encoding="utf-8"
+        ) as f:
+            f.write(f"{res}\n")
+        sleep(10)
