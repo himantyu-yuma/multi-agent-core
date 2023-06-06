@@ -93,6 +93,7 @@ def filter_scripts(published_date: datetime.date | None):
 
 
 if __name__ == "__main__":
+    import pathlib
     from time import sleep
 
     # sample = create_script(
@@ -101,11 +102,15 @@ if __name__ == "__main__":
     #     datetime.datetime(2023, 5, 19, 12, 0, 0),
     # )
     # print(sample)
-    for i in range(3):
+    current_dir = pathlib.Path(__file__).parent
+
+    for i in range():
         sample = create_script(
             "雑談",
             "三姉妹が大学生活について雑談している。",
             datetime.datetime(2023, 6, 6, 13, i, 0),
         )
+        with open(current_dir / "scripts.txt", mode="w") as f:
+            f.write(f"{sample}\n")
         print(sample)
         sleep(10)
