@@ -1,12 +1,17 @@
 version: '3'
+volumes:
+    mongo-data:
 services:
-  # TODO: 安定したらvolume永続化
   mongo:
     image: mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - type: volume
+        source: mongo-data
+        target: /data/db
   mongo-express:
     image: mongo-express
     restart: always
