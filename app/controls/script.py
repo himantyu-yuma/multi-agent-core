@@ -92,6 +92,18 @@ def filter_scripts(published_date: datetime.date | None):
     return result
 
 
+def update_script(script_id, data):
+    client = MongoDB(collection_name="scripts")
+    # data = {
+    #     "topic": topic,
+    #     "prompt": template.format(topic=instruction),
+    #     "scripts": scripts,
+    #     "published_at": published_at,
+    #     "created_at": datetime.datetime.now(),
+    # }
+    client.update_one({"_id": ObjectId(script_id)}, {"$set": data})
+
+
 if __name__ == "__main__":
     import pathlib
     from time import sleep

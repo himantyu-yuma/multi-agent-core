@@ -16,3 +16,12 @@ class CreateScriptRequest(BaseModel):
                 "published_at": datetime.datetime(2023, 5, 19, 12, 0, 0),
             }
         }
+class UpdateScriptRequest(BaseModel):
+    published_at: datetime.datetime
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "published_at": datetime.datetime(2023, 5, 19, 12, 0, 0),
+            }
+        }

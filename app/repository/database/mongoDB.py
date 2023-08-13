@@ -34,6 +34,9 @@ class MongoDB:
     def insert_one(self, data):
         return self.collection.insert_one(data)
 
+    def update_one(self, filter, data):
+        return self.collection.update_one(filter, data)
+
     def close_connection(self):
         self.client.close()
 

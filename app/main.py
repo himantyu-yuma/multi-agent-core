@@ -1,15 +1,28 @@
 import datetime
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
 from pymongo.errors import DuplicateKeyError
 
 from controls import agent_response, script, user_response
 from models.agent_response import CreateAgentResponseRequest
-from models.scripts import CreateScriptRequest
+from models.scripts import CreateScriptRequest, UpdateScriptRequest
 from models.user_response import CreateUserResponseRequest
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3030",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("shutdown")
 def shutdown_event():
@@ -51,6 +64,9 @@ async def get_script(script_id: str):
     """
     return script.get_script(script_id)
 
+@app.put("/scripts/{script_id}")
+async def put_scripts(script_id: str, req: UpdateScriptRequest):
+    return script.update_script(script_id, {"published_at": req.published_at})
 
 @app.post("/responses/user")
 async def post_user_response(req: CreateUserResponseRequest):
